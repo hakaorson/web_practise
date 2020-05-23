@@ -30,6 +30,13 @@ def get_structed_info():
         final_info.append(temp_chap_info)
     return final_info
 
+
+def filepath_process(path):  # 获取到file文件的路径
+    path = path.replace('\\', '/')
+    path_list = path.split('/')
+    result = '/'.join(path_list[2:])
+    return result
+
 # 建立路由，通过路由可以执行其覆盖的方法，可以多个路由指向同一个方法，意思就是给出了/index就执行一次这个方法
 @app.route('/')
 @app.route('/index')
@@ -51,11 +58,18 @@ def route_media(chapter=None, section=None):
         video_path = query.video_path
         png_path = query.png_path
         if video_path:
-            video_path = video_path[4:]  # 替换前面的app/这几个字段
+            video_path = filepath_process(video_path)  # 替换前面的app/这几个字段
         if png_path:
-            pass
+            ppt_infos = {'name': '{} {} PPT文件'.format(
+                chapter, section), 'pngs': []}
+            imgpath_list = os.listdir(png_path)
+            for index, imgpath in enumerate(imgpath_list):
+                temp_path = os.path.join(png_path, imgpath)
+                png_info = {'path': filepath_process(temp_path)}
+                png_info['name'] = '第{}页'.format(CHINUM_MAP[index])
+                ppt_infos['pngs'].append(png_info)
         result = render_template(
-            'main/media.html', chaps=final_info, video_path=video_path)
+            'main/media.html', chaps=final_info, video_path=video_path, ppt_infos=ppt_infos)
     else:
         result = render_template('main/media.html', chaps=final_info)
     return result
@@ -64,8 +78,17 @@ def route_media(chapter=None, section=None):
 @app.route('/file')
 @app.route('/file/<type>')
 def route_file(type=None):
+    homework_infos = []
+    for info in models.Homework.query.all():
+        homework_infos.append(
+            {'name': info.name, 'desc': info.desc, 'path': info.path})
+    case_infos = []
+    for info in models.Case.query.all():
+        case_infos.append(
+            {'name': info.name, 'desc': info.desc, 'path': info.path})
     final_info = get_structed_info()
-    result = render_template('main/file.html', chaps=final_info)
+    result = render_template(
+        'main/file.html', homework_infos=homework_infos, case_infos=case_infos, chaps=final_info)
     return result
 
 

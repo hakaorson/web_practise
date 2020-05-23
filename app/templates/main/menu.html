@@ -28,8 +28,10 @@
                         <p>{{sec.desc}}</p>
                         <div class="ui hidden divider"></div>
                         <form action="" method="GET">
-                            <a href="/media/{{chap.name}}/{{sec.name}}/videos" class="href">视频</a>
-                            <a href="" class="href">ppt</a>
+                            <a href="{{ url_for('route_media',chapter=chap.name,section=sec.name) }}"
+                                class="href">视频</a>
+                            <a href="{{ url_for('route_media',chapter=chap.name,section=sec.name) }}"
+                                class="href">ppt</a>
                         </form>
                     </div>
                     {% endfor %}

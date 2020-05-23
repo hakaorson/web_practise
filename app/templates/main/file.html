@@ -1,48 +1,44 @@
 {% extends "main/menu.html" %} {% block right %}
+<h2>所有作业</h2>
 <div class="ui left aligned segment">
     <div class="ui container">
+        {% for homework_info in homework_infos %}
         <div class="ui grid">
             <div class="four wide column">
-                <p>第一章第一节</p>
+                <p>{{homework_info.name}}</p>
             </div>
             <div class="six wide column">
-                <p>内容aaaaaaaaaaaaa</p>
+                <p>{{homework_info.desc}}</p>
             </div>
             <div class="three wide column">
-                <p>查看</p>
+                <a href="{{ url_for('static',filename=homework_info.path) }}">查看</a>
             </div>
             <div class="three wide column">
-                <p>下载</p>
+                <a href="{{ url_for('static',filename=homework_info.path) }}" download="name.pdf">下载</a>
             </div>
         </div>
+        {% endfor %}
+    </div>
+</div>
+<h2>所有案例</h2>
+<div class="ui left aligned segment">
+    <div class="ui container">
+        {% for case_info in case_infos %}
         <div class="ui grid">
             <div class="four wide column">
-                <p>第一章第一节</p>
+                <p>{{case_info.name}}</p>
             </div>
             <div class="six wide column">
-                <p>内容aaaaaaaaaaaaa</p>
+                <p>{{case_info.desc}}</p>
             </div>
             <div class="three wide column">
-                <a href="../../static/files/pdfs/新建 Microsoft Word 文档.pdf" download="name.pdf">下载</a>
+                <a href="{{ url_for('static',filename=case_info.path) }}">查看</a>
             </div>
             <div class="three wide column">
-                <a href="../../static/files/pdfs/新建 Microsoft Word 文档.pdf">查看</a>
+                <a href="{{ url_for('static',filename=case_info.path) }}" download="name.pdf">下载</a>
             </div>
         </div>
-        <div class="ui grid">
-            <div class="four wide column">
-                <p>第一章第一节</p>
-            </div>
-            <div class="six wide column">
-                <p>内容aaaaaaaaaaaaa</p>
-            </div>
-            <div class="three wide column">
-                <p>查看</p>
-            </div>
-            <div class="three wide column">
-                <p>下载</p>
-            </div>
-        </div>
+        {% endfor %}
     </div>
 </div>
 {% endblock %}
