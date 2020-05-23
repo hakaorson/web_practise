@@ -1,0 +1,76 @@
+{% extends "manage/menu.html" %} {% block right %}
+<form action="" method="POST" enctype="multipart/form-data">
+    <h2>所有作业</h2>
+    <div class="ui left aligned segment">
+        <div class="ui container">
+            <div class="ui grid">
+                <div class="four wide column">
+                    <input type="text" name="homework name" id="" placeholder="作业名称">
+                </div>
+                <div class="four wide column">
+                    <input type="text" name="homework desc" id="" placeholder="作业简述">
+                </div>
+                <div class="six wide column">
+                    <input type="file" name="homework file">
+                </div>
+                <div class="two wide column">
+                    <input type="submit" name="homework input" value="添加作业">
+                </div>
+            </div>
+            {% for homework_info in homework_infos %}
+            <div class="ui grid">
+                <div class="four wide column">
+                    <p>{{homework_info.name}}</p>
+                </div>
+                <div class="seven wide column">
+                    <p>{{homework_info.desc}}</p>
+                </div>
+                <div class="three wide column">
+
+                    <a href={{homework_info.path}} methods="GET" target="_blank">查看</a>
+                </div>
+                <div class="two wide column">
+                    <a href="/delete_file/homework/{{homework_info.name}}">删除</a>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+    <h2>所有案例</h2>
+    <div class="ui left aligned segment">
+        <div class="ui container">
+            <div class="ui grid">
+                <div class="four wide column">
+                    <input type="text" name="case name" id="" placeholder="案例名称">
+                </div>
+                <div class="four wide column">
+                    <input type="text" name="case desc" id="" placeholder="案例简述">
+                </div>
+                <div class="six wide column">
+                    <input type="file" name="case file">
+                </div>
+                <div class="two wide column">
+                    <input type="submit" name="case input" value="添加案例">
+                </div>
+            </div>
+            {% for case_info in case_infos %}
+            <div class="ui grid">
+                <div class="four wide column">
+                    <p>{{case_info.name}}</p>
+                </div>
+                <div class="seven wide column">
+                    <p>{{case_info.desc}}</p>
+                </div>
+                <div class="three wide column">
+
+                    <a href={{case_info.path}} methods="GET" target="_blank">查看</a>
+                </div>
+                <div class="two wide column">
+                    <a href="/delete_file/case/{{case_info.name}}">删除</a>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</form>
+{% endblock %}

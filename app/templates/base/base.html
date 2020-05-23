@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="shortcut icon" href="../../static/files/pictures/ico.jpg" type="image/x-icon" />
+    <!-- 引入css文件 -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css">
+</head>
+
+<body>
+    <!-- 导航部分 -->
+    <nav class="ui attached segment">
+        <div class="ui container">
+            <!-- 导航部分内容 -->
+            <a href="{{url_for('route_index')}}" class="href">
+                <h2><i class="home icon"></i>智能数据分析技术与应用</h2>
+            </a>
+        </div>
+    </nav>
+    <!-- 主体部分 -->
+    <div class="ui attached segment">
+        <div class="ui container">
+            <!-- 主题部分内容 -->
+            <div class="ui grid">
+                <!-- 左侧 -->
+                <div class="five wide column">
+                    {% block left %} {% endblock %}
+                </div>
+                <!-- 右侧 -->
+                <div class="eleven wide column">
+                    {% block right %} {% endblock %}
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- 尾部 -->
+    <footer class="ui attached segment">
+        <div class="ui container">
+            <a href="{{url_for('route_manage_chapter')}}" class="href">
+                管理页面
+            </a>
+        </div>
+    </footer>
+    <!-- 引入js文件 -->
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.2/dist/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.js"></script>
+    <script src="{{url_for('static',filename='js/semantic_extend.js')}}"></script>
+</body>
+
+</html>

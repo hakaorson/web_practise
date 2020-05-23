@@ -1,0 +1,70 @@
+{% extends "manage/menu.html" %} {% block right %}
+<form action="" method="POST" enctype="multipart/form-data">
+    <div class="ui left aligned segment">
+        <div class="ui container">
+            {% for chap in chaps %}
+            <div class="ui grid">
+                <div class="thirteen wide column">
+                    <div class="ui fluid button">{{chap.show}}</div>
+                </div>
+                <div class="three wide column">
+                    <a href="/delete_chapter/{{chap.name}}" class="ui fluid button">删除章</a>
+                </div>
+            </div>
+            {% for sec in chap.secs %}
+            <div class="ui grid">
+                <div class="three wide column">
+                </div>
+                <div class="ten wide column">
+                    <div class="ui fluid button">{{sec.show}}</div>
+                </div>
+                <div class="three wide column">
+                    <a href="/delete_chapter/{{chap.name}}/{{sec.name}}" class="ui fluid button">删除节</a>
+                </div>
+            </div>
+            {% endfor %}
+            {% endfor %}
+            <div class="ui grid">
+                <div class="three wide column">
+                    <p class="ui fluid button">添加新节</p>
+                </div>
+                <div class="four wide column">
+                    <div class="ui selection dropdown">
+                        <input type="hidden" name="select chap"">
+                        <i class=" dropdown icon"></i>
+                        <div class="default text">选择大章</div>
+                        <div class="menu">
+                            {% for chap in chaps %}
+                            <div class="item" data-value="{{chap.name}}">{{chap.show}}</div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+                <div class="three wide column">
+                    <input type="text" name="sec name" id="" placeholder="输入 小节 名称" class="ui fluid button">
+                </div>
+                <div class="three wide column">
+                    <input type="text" name="sec desc" id="" placeholder="输入 小节 描述" class="ui fluid button">
+                </div>
+                <div class="three wide column">
+                    <input type="submit" name="sec input" value="确定" id="aaa" class="ui fluid button">
+                </div>
+            </div>
+            <div class="ui grid">
+                <div class="three wide column">
+                    <p class="ui fluid button">添加新章</p>
+                </div>
+                <div class="five wide column">
+                    <input type="text" name="chapter name" id="" placeholder="输入 大章 名称" class="ui fluid button">
+                </div>
+                <div class="five wide column">
+                    <input type="text" name="chapter desc" id="" placeholder="输入 大章 描述" class="ui fluid button">
+                </div>
+                <div class="three wide column">
+                    <input type="submit" name="chapter input" value="确定" class="ui fluid button">
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+{% endblock %}

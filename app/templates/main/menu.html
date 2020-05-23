@@ -1,0 +1,52 @@
+{% extends "base/base.html" %} {% block left %}
+<div class="ui fluid vertical pointing menu">
+    <a class="item" href="{{url_for('route_index')}}">
+        课件介绍
+    </a>
+</div>
+<div class="ui fluid vertical pointing menu">
+    <a class="item" href="{{url_for('route_chart')}}">
+        教学大纲
+    </a>
+</div>
+<div class="ui fluid styled accordion">
+    <div class="active title"> 课件</div>
+    <div class="active content">
+        <div class="accordion">
+            {% for chap in chaps %}
+            <div class="active title">
+                <i class="dropdown icon"></i> {{chap.name}}
+            </div>
+            <div class="active content">
+                <p>{{chap.desc}}</p>
+                <div class="accordion">
+                    {% for sec in chap.secs %}
+                    <div class="title">
+                        <i class="dropdown icon"></i> {{sec.name}}
+                    </div>
+                    <div class="content">
+                        <p>{{sec.desc}}</p>
+                        <div class="ui hidden divider"></div>
+                        <form action="" method="GET">
+                            <a href="/media/{{chap.name}}/{{sec.name}}/videos" class="href">视频</a>
+                            <a href="" class="href">ppt</a>
+                        </form>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+<div class="ui fluid vertical pointing menu">
+    <a class="item" href="{{url_for('route_file')}}">
+        案例
+    </a>
+</div>
+<div class="ui fluid vertical pointing menu">
+    <a class="item" href="{{url_for('route_file')}}">
+        作业
+    </a>
+</div>
+{% endblock %}

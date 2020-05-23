@@ -1,0 +1,12 @@
+{
+    "python.pythonPath": "D:\\Anaconda3\\python.exe",
+    "python.linting.flake8Enabled": true,
+    "sqltools.connections": [
+        {
+            "database": "${workspaceFolder}\\teach_web.db",
+            "dialect": "SQLite",
+            "name": "teach_web"
+        }
+    ],
+    "sqltools.useNodeRuntime": true
+}

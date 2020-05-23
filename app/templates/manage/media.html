@@ -1,0 +1,69 @@
+{% extends "manage/menu.html" %} {% block right %}
+<form action="" method="POST" enctype="multipart/form-data">
+    <div class="ui left aligned segment">
+        <div class="ui container">
+            <div class="ui grid">
+                <div class="five wide column">
+                    <div class="ui pointing dropdown link item fluid button">
+                        <input type="hidden" name="select chap">
+                        <i class=" dropdown icon"></i>
+                        <div class="default text">选择章节</div>
+                        <div class="menu">
+                            {% for chap in chaps %}
+                            <div class="item">
+                                <i class="dropdown icon"></i>
+                                <span class="text">{{chap.show}}</span>
+                                <div class="menu">
+                                    {% for sec in chap.secs %}
+                                    <div class="item" data-value="{{chap.name}} {{sec.name}}">{{sec.show}}</div>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+                <div class="three wide column">
+                    <input type="file" name="ppt file"><span id="text">请上传PPT源文件.ppt</span>
+                </div>
+                <div class="three wide column">
+                    <input type="file" name="png file"><span id="text">请上传PPT压缩文件.zip</span>
+                </div>
+                <div class="three wide column">
+                    <input type="file" name="video file"><span id="text">请上传视频文件.mp4</span>
+                </div>
+                <div class="two wide column">
+                    <input type="submit" name="upload file" value="确定" class="ui fluid button">
+                </div>
+            </div>
+
+
+
+            {% for chap in chaps %}
+            <div class="ui grid">
+                <div class="sixteen wide column">
+                    <div class="ui fluid button">{{chap.show}}</div>
+                </div>
+            </div>
+            {% for sec in chap.secs %}
+            <div class="ui grid">
+                <div class="four wide column">
+                    <div class="ui fluid button">{{sec.show}}</div>
+                </div>
+                <div class="four wide column">
+                    <a href="/clear_media/ppt/{{chap.name}}/{{sec.name}}" class="ui fluid button">清除PPT源文件</a>
+                </div>
+                <div class="four wide column">
+                    <a href="/clear_media/png/{{chap.name}}/{{sec.name}}" class="ui fluid button">清除PPT压缩文件</a>
+                </div>
+                <div class="four wide column">
+                    <a href="/clear_media/video/{{chap.name}}/{{sec.name}}" class="ui fluid button">清除视频文件</a>
+                </div>
+
+            </div>
+            {% endfor %}
+            {% endfor %}
+        </div>
+    </div>
+</form>
+{% endblock %}
