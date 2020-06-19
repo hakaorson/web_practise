@@ -1,10 +1,13 @@
 {% extends "main/menu.html" %} {% block right %}
-
+<h2>所有作业</h2>
 {% for data in file.list %}
-<p>{{data.name}}</p>
-<p>{{data.desc}}</p>
-<a href="{{ url_for('static',filename=data.path) }}">查看</a>
-<a href="{{ url_for('static',filename=data.path) }}" download="{{data.file}}">下载</a>
+<div class="ui grid">
+    <div class="six wide column"><p>作业名称：{{data.name}}</p></div>
+    <div class="six wide column"><p>作业描述：{{data.desc}}</p></div>
+    <div class="two wide column"><a href="{{ url_for('static',filename=data.path) }}">查看</a></div>
+    <div class="two wide column"><a href="{{ url_for('static',filename=data.path) }}" download="{{data.file}}">下载</a></div>
+  </div>
+<div class="ui hidden divider"></div>
 {% endfor %}
 <!-- 
 

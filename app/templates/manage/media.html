@@ -1,106 +1,59 @@
 {% extends "manage/menu.html" %} {% block right %}
 <form action="/add_media_file" method="POST" enctype="multipart/form-data">
-    <div class="ui pointing dropdown link item button">
-        <input type="hidden" name="select chap">
-        <div class="default text">选择章节</div>
-        <div class="menu">
-            {% for chap in chaps %}
-            <div class="item">
-                <i class="dropdown icon"></i>
-                <span class="text">{{chap.c_index}}</span>
+    <div class="ui grid">
+        <div class="three wide column">
+            <div class="ui pointing dropdown link item button">
+                <input type="hidden" name="select chap">
+                <div class="default text">选择章节</div>
                 <div class="menu">
-                    {% for sec in chap.secs %}
-                    <div class="item" data-value="{{chap.c_id}} {{sec.s_id}}">{{sec.c_s_index}}</div>
-                    {% endfor %}
-                </div>
-            </div>
-            {% endfor %}
-        </div>
-    </div>
-    <input type="file" name="ppt_file"><span id="text">PPT源文件.ppt</span>
-    <input type="file" name="png_file"><span id="text">PPT压缩文件.zip</span>
-    <input type="file" name="video_file"><span id="text">视频文件.mp4</span>
-    <input type="submit" name="upload_file" value="确定">
-</form>
-{% for chap in chaps %}
-{% for sec in chap.secs %}
-<p>{{sec.c_s_index}}</p>
-{% for item in sec.media_data %}
-{% if item.exit %}
-<a href="/clear_media_file/{{chap.c_id}}/{{sec.s_id}}/{{item.type}}" class="">清除{{item.type}}</a>
-{% else %}
-<a href="/clear_media_file/{{chap.c_id}}/{{sec.s_id}}/{{item.type}}" class="">清除{{item.type}}</a>
-{% endif %}
-{% endfor %}
-{% endfor %}
-{% endfor %}
-<!-- 
-<form action="" method="POST" enctype="multipart/form-data">
-    <div class="ui left aligned segment">
-        <div class="ui container">
-            <div class="ui grid">
-                <div class="five wide column">
-                    <div class="ui pointing dropdown link item fluid button">
-                        <input type="hidden" name="select chap">
-                        <i class=" dropdown icon"></i>
-                        <div class="default text">选择章节</div>
+                    {% for chap in chaps %}
+                    <div class="item">
+                        <i class="dropdown icon"></i>
+                        <span class="text">{{chap.c_index}}</span>
                         <div class="menu">
-                            {% for chap in chaps %}
-                            <div class="item">
-                                <i class="dropdown icon"></i>
-                                <span class="text">{{chap.show}}</span>
-                                <div class="menu">
-                                    {% for sec in chap.secs %}
-                                    <div class="item" data-value="{{chap.c_id}} {{sec.s_id}}">{{sec.show}}</div>
-                                    {% endfor %}
-                                </div>
-                            </div>
+                            {% for sec in chap.secs %}
+                            <div class="item" data-value="{{chap.c_id}} {{sec.s_id}}">{{sec.c_s_index}}</div>
                             {% endfor %}
                         </div>
                     </div>
-                </div>
-                <div class="three wide column">
-                    <input type="file" name="ppt file"><span id="text">请上传PPT源文件.ppt</span>
-                </div>
-                <div class="three wide column">
-                    <input type="file" name="png file"><span id="text">请上传PPT压缩文件.zip</span>
-                </div>
-                <div class="three wide column">
-                    <input type="file" name="video file"><span id="text">请上传视频文件.mp4</span>
-                </div>
-                <div class="two wide column">
-                    <input type="submit" name="upload file" value="确定" class="ui fluid button">
+                    {% endfor %}
                 </div>
             </div>
-
-
-
-            {% for chap in chaps %}
-            <div class="ui grid">
-                <div class="sixteen wide column">
-                    <div class="ui fluid button">{{chap.show}}</div>
-                </div>
-            </div>
-            {% for sec in chap.secs %}
-            <div class="ui grid">
-                <div class="four wide column">
-                    <div class="ui fluid button">{{sec.show}}</div>
-                </div>
-                <div class="four wide column">
-                    <a href="/clear_media/ppt/{{chap.c_id}}/{{sec.s_id}}" class="ui fluid button">清除PPT源文件</a>
-                </div>
-                <div class="four wide column">
-                    <a href="/clear_media/png/{{chap.c_id}}/{{sec.s_id}}" class="ui fluid button">清除PPT压缩文件</a>
-                </div>
-                <div class="four wide column">
-                    <a href="/clear_media/video/{{chap.c_id}}/{{sec.s_id}}" class="ui fluid button">清除视频文件</a>
-                </div>
-
-            </div>
-            {% endfor %}
-            {% endfor %}
+        </div>
+        <div class="four wide column">
+            <input type="file" name="ppt_file"><span id="text">PPT源文件.ppt</span>
+        </div>
+        <div class="four wide column"> <input type="file" name="png_file"><span id="text">PPT压缩文件.zip</span></div>
+        <div class="four wide column"> <input type="file" name="video_file"><span id="text">视频文件.mp4</span></div>
+        <div class="one wide column">
+            <input type="submit" name="upload_file" value="确定">
         </div>
     </div>
 </form>
- -->
+{% for chap in chaps %}
+{% for sec in chap.secs %}
+<div class="ui grid">
+    <div class="four wide column">
+        <button class="ui button">
+            {{sec.c_s_index}}
+        </button>
+    </div>
+    {% for item in sec.media_data %}
+    <div class="four wide column">
+        {% if item.exit %}
+        <button class="ui button">
+            <a href="/clear_media_file/{{chap.c_id}}/{{sec.s_id}}/{{item.type}}" class="">清除{{item.type}}</a>
+        </button>
+        {% else %}
+        <button class="negative ui button">
+            <a href="/clear_media_file/{{chap.c_id}}/{{sec.s_id}}/{{item.type}}" class="">{{item.type}}缺失</a>
+        </button>
+        {% endif %}
+    </div>
+    {% endfor %}
+</div>
+
+
+{% endfor %}
+{% endfor %}
 {% endblock %}

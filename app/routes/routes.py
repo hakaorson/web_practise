@@ -10,7 +10,7 @@ from flask import url_for
 import zipfile
 import shutil
 from app.routes import base
-from flask_login import login_user, logout_user,login_required,current_user
+from flask_login import login_user, logout_user, login_required, current_user
 from flask import flash
 from flask_wtf import FlaskForm
 from wtforms import StringField, BooleanField, PasswordField
@@ -35,7 +35,9 @@ def index():  # 这个index返回的东西就是网页需要呈现的东西，�
 @app.route('/chart')
 def chart():
     final_info = base.get_structed_info()
-    result = render_template('main/chart.html', chaps=final_info)
+    base_info = {'chart_path': 'base/chart.png'}
+    result = render_template(
+        'main/chart.html', chaps=final_info, base=base_info)
     return result
 
 
@@ -50,19 +52,21 @@ def media(chapter=None, section=None):
     video_path = query.video_path
     png_path = query.png_path
     if video_path:
-        video_infos = {'name': query.cs_id, 'path': base.filepath_process(
+        video_name='{}  视频'.format(query.s_name)
+        video_infos = {'name': video_name, 'path': base.filepath_process(
             video_path)}  # 替换前面的app/这几个字段
     if png_path:
-        ppt_infos = {'name': '{} {} PPT文件'.format(
-            chapter, section), 'pngs': []}
+        ppt_name='第{}章  第{}节  {}  PPT文件'.format(base.CHINUM_MAP[int(chapter)],base.CHINUM_MAP[int(section)],query.s_name)
+        ppt_infos = {'name': ppt_name, 'pngs': []}
         imgpath_list = os.listdir(png_path)
         for index, imgpath in enumerate(imgpath_list):
             temp_path = os.path.join(png_path, imgpath)
             png_info = {'path': base.filepath_process(temp_path)}
             png_info['name'] = '第{}页'.format(base.CHINUM_MAP[index+1])
             ppt_infos['pngs'].append(png_info)
+    title='第{}章  第{}节  {}'.format(base.CHINUM_MAP[int(chapter)],base.CHINUM_MAP[int(section)],query.s_name)
     return render_template(
-        'main/media.html', chaps=final_info, video_infos=video_infos, ppt_infos=ppt_infos)
+        'main/media.html', chaps=final_info, video_infos=video_infos, ppt_infos=ppt_infos,title=title)
 
 
 @app.route('/file/<typ>')
@@ -93,7 +97,7 @@ def submit_login_after():
     user = models.User.query.filter(
         models.User.user == form.username.data, models.User.passwd == form.password.data).first()
     if user:
-        login_user(user,remember=form.remember_me.data)
+        login_user(user, remember=form.remember_me.data)
         return redirect(url_for('manage_chapter'))
     else:
         flash('登录错误')

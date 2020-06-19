@@ -1,48 +1,101 @@
 {% extends "main/menu.html" %} {% block right %}
-<table class="ui celled striped table">
-    <thead>
-        <tr>
-            <th colspan="3">
-                Git Repository
-            </th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td class="collapsing">
-                <i class="folder icon"></i> node_modules
-            </td>
-            <td>Initial commit</td>
-            <td class="right aligned collapsing">10 hours ago</td>
-        </tr>
-        <tr>
-            <td>
-                <i class="folder icon"></i> test
-            </td>
-            <td>Initial commit</td>
-            <td class="right aligned">10 hours ago</td>
-        </tr>
-        <tr>
-            <td>
-                <i class="folder icon"></i> build
-            </td>
-            <td>Initial commit</td>
-            <td class="right aligned">10 hours ago</td>
-        </tr>
-        <tr>
-            <td>
-                <i class="file outline icon"></i> package.json
-            </td>
-            <td>Initial commit</td>
-            <td class="right aligned">10 hours ago</td>
-        </tr>
-        <tr>
-            <td>
-                <i class="file outline icon"></i> Gruntfile.js
-            </td>
-            <td>Initial commit</td>
-            <td class="right aligned">10 hours ago</td>
-        </tr>
-    </tbody>
-</table>
+<div class="ui very relaxed items">
+    <h2 class="ui header">教学大纲</h2>
+    <h3 class="ui header">一、课程定位和教学目标</h3>
+    <h4 class="ui header">课程定位</h4>
+    <p>本课程是面向全校非计算机专业的通识类课程。它要求学生已具备一定的计算机文化基础知识，能够使用操作系统和常用的软件，具有使用Pyhon/Java/C/VB任一门高级程序设计语言进行程序编写的能力。</p>
+    <h4 class="ui header">课程教学目标</h4>
+    <p>课程教学目标1：通过本课程学习，使学生掌握数据组织的基本形式，数据存储的常用方式、数据的清洗、转换与合并、数据的汇总和统计方法、数据的可视化展示，能够理解数据科学的知识，掌握实践技能。</p>
+    <p>课程教学目标2：通过实际案例，使学生理解机器学习、深度学习方法及在文本分类、图像分类等人工智能前沿领域的应用。基于Python及相关科学计算工具包介绍，培养学生运用统计学、人工智能等先进技术从数据中获取知识，利用机器学习和深度的方法解决实际数据分析问题、构建基于数据分析的应用系统的能力。
+    </p>
+    <h3 class="ui header">二、课程内容、教学要求、学时分配</h3>
+    <p>课程主要介绍数据科学处理数据的工作流程以及如何基于Python第三方科学计算库实现数据分析的技术，包括数据加载、数据规整化和数据探索、机器学习建模技术和数据可视化，并通过图像、文本等前沿应用，引入人工智能技术在数据科学领域应用的最新成果。
+    </p>
+    <img src="{{url_for('static',filename=base.chart_path)}}" alt="" class="">
+    <h3 class="ui header">三、考核、成绩评定方式</h3>
+    <p>为全面衡量学生的学习情况、监督学生学习过程，课程采用面向过程的综合考核方式，考核内容包括课堂出勤、作业完成、期末考试，成绩以平时成绩和期末考试成绩按照比重加权计算，具体见下表</p>
+    <table class="ui celled table">
+        <thead>
+            <tr>
+                <th colspan="3">
+                    成绩分配权重表
+                </th>
+            </tr>
+        </thead>
+
+        <thead>
+            <tr>
+                <th>考核形式（考勤/过程考核/考试等）</th>
+                <th>考核方式(期末考试/期中考试/平时成绩等)</th>
+                <th class="right aligned collapsing">比重（%）</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>
+                    考勤
+                </td>
+                <td>平时成绩</td>
+                <td class="right aligned collapsing">10%</td>
+            </tr>
+            <tr>
+                <td>
+                    作业与实践项目
+                </td>
+                <td>平时成绩</td>
+                <td class="right aligned collapsing">30%</td>
+            </tr>
+            <tr>
+                <td>
+                    考试
+                </td>
+                <td>期末考试</td>
+                <td class="right aligned collapsing">60%</td>
+            </tr>
+        </tbody>
+    </table>
+    <h3 class="ui header">四、主要参考书</h3>
+    <table class="ui celled table">
+        <thead>
+            <tr>
+                <th colspan="3">
+                    主要参考书
+                </th>
+            </tr>
+        </thead>
+
+        <thead>
+            <tr>
+                <th>教材名称</th>
+                <th>作者</th>
+                <th>出版社</th>
+                <th>ISBN</th>
+                <th class="right aligned collapsing">版次</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>数据科学技术与应用</td>
+                <td>宋晖 刘晓强等</td>
+                <td>电子工业出版社</td>
+                <td>9787121346651</td>
+                <td class="right aligned collapsing">1</td>
+            </tr>
+            <tr>
+                <td>数据科学概论</td>
+                <td>覃雄派等</td>
+                <td>中国人民大学出版社</td>
+                <td>9787300252926</td>
+                <td class="right aligned collapsing">1</td>
+            </tr>
+            <tr>
+                <td>利用Python进行数据分析</td>
+                <td>Wes McKnney</td>
+                <td>机械工业出版社</td>
+                <td>9787111603702</td>
+                <td class="right aligned collapsing">2</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
 {% endblock %}

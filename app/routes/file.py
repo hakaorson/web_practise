@@ -84,8 +84,9 @@ def update_file(typ, name):
     else:
         query = models.HomeAndCase.query.filter(
             models.HomeAndCase.name == name)
+        all_names = [item.name for item in models.HomeAndCase.query.all()]
         update_data = {}
-        if newname and newname != name:
+        if newname and newname != name and newname not in set(all_names):
             new_director = os.path.join(
                 'app/static/{}/{}'.format(typ, newname))
             os.rename(director, new_director)
