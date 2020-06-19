@@ -1,8 +1,8 @@
 {% extends "main/menu.html" %} {% block right %}
 <div class="ui center aligned segment">
-    <h3>视频标题</h3>
+    <h3>{{video_infos.name}}</h3>
     <video width="720" height="480" controls>
-        <source src="{{ url_for('static',filename=video_path) }}" type="video/mp4">
+        <source src="{{ url_for('static',filename=video_infos.path) }}" type="video/mp4">
     </video>
 </div>
 <div class="ui center aligned segment">
@@ -11,6 +11,5 @@
     <img class="ui bordered fluid image" src="{{ url_for('static',filename=png.path) }}">
     <p>{{png.name}}</p>
     {% endfor %}
-
 </div>
 {% endblock %}

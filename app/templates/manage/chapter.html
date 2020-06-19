@@ -1,70 +1,30 @@
 {% extends "manage/menu.html" %} {% block right %}
-<form action="" method="POST" enctype="multipart/form-data">
-    <div class="ui left aligned segment">
-        <div class="ui container">
-            {% for chap in chaps %}
-            <div class="ui grid">
-                <div class="thirteen wide column">
-                    <div class="ui fluid button">{{chap.show}}</div>
-                </div>
-                <div class="three wide column">
-                    <a href="/delete_chapter/{{chap.name}}" class="ui fluid button">删除章</a>
-                </div>
-            </div>
-            {% for sec in chap.secs %}
-            <div class="ui grid">
-                <div class="three wide column">
-                </div>
-                <div class="ten wide column">
-                    <div class="ui fluid button">{{sec.show}}</div>
-                </div>
-                <div class="three wide column">
-                    <a href="/delete_chapter/{{chap.name}}/{{sec.name}}" class="ui fluid button">删除节</a>
-                </div>
-            </div>
-            {% endfor %}
-            {% endfor %}
-            <div class="ui grid">
-                <div class="three wide column">
-                    <p class="ui fluid button">添加新节</p>
-                </div>
-                <div class="four wide column">
-                    <div class="ui selection dropdown">
-                        <input type="hidden" name="select chap"">
-                        <i class=" dropdown icon"></i>
-                        <div class="default text">选择大章</div>
-                        <div class="menu">
-                            {% for chap in chaps %}
-                            <div class="item" data-value="{{chap.name}}">{{chap.show}}</div>
-                            {% endfor %}
-                        </div>
-                    </div>
-                </div>
-                <div class="three wide column">
-                    <input type="text" name="sec name" id="" placeholder="输入 小节 名称" class="ui fluid button">
-                </div>
-                <div class="three wide column">
-                    <input type="text" name="sec desc" id="" placeholder="输入 小节 描述" class="ui fluid button">
-                </div>
-                <div class="three wide column">
-                    <input type="submit" name="sec input" value="确定" id="aaa" class="ui fluid button">
-                </div>
-            </div>
-            <div class="ui grid">
-                <div class="three wide column">
-                    <p class="ui fluid button">添加新章</p>
-                </div>
-                <div class="five wide column">
-                    <input type="text" name="chapter name" id="" placeholder="输入 大章 名称" class="ui fluid button">
-                </div>
-                <div class="five wide column">
-                    <input type="text" name="chapter desc" id="" placeholder="输入 大章 描述" class="ui fluid button">
-                </div>
-                <div class="three wide column">
-                    <input type="submit" name="chapter input" value="确定" class="ui fluid button">
-                </div>
-            </div>
-        </div>
-    </div>
+{% for chap in chaps %}
+<div class="">{{chap.c_index}}</div>
+<form method="post" action="/update_chapter/{{chap.c_id}}">
+    <input name="chapname_{{chap.c_id}}" type="text" value="{{chap.name}}">
+    <input name="chapdesc_{{chap.c_id}}" type="text" value="{{chap.desc}}">
+    <input type="submit" value="修改章">
+</form>
+<a href="/delete_chapter/{{chap.c_id}}">删除章</a>
+{% for sec in chap.secs %}
+<div class="">{{sec.s_index}}</div>
+<form method="post" action="/update_section/{{chap.c_id}}/{{sec.s_id}}">
+    <input name="secname_{{chap.c_id}}_{{sec.s_id}}" type="text" value="{{sec.name}}">
+    <input name="secdesc_{{chap.c_id}}_{{sec.s_id}}" type="text" value="{{sec.desc}}">
+    <input type="submit" value="修改节">
+</form>
+<a href="/delete_section/{{chap.c_id}}/{{sec.s_id}}">删除节</a>
+{% endfor %}
+<form method="post" action="/add_section/{{chap.c_id}}">
+    <input name="secname_{{chap.c_id}}" type="text">
+    <input name="secdesc_{{chap.c_id}}" type="text">
+    <input type="submit" value="添加节">
+</form>
+{% endfor %}
+<form method="post" action="/add_chapter">
+    <input name="chapname" type="text">
+    <input name="chapdesc" type="text">
+    <input type="submit" value="添加章">
 </form>
 {% endblock %}

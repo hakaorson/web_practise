@@ -1,4 +1,14 @@
 {% extends "main/menu.html" %} {% block right %}
+
+{% for data in file.list %}
+<p>{{data.name}}</p>
+<p>{{data.desc}}</p>
+<a href="{{ url_for('static',filename=data.path) }}">查看</a>
+<a href="{{ url_for('static',filename=data.path) }}" download="{{data.file}}">下载</a>
+{% endfor %}
+<!-- 
+
+
 <h2>所有作业</h2>
 <div class="ui left aligned segment">
     <div class="ui container">
@@ -20,25 +30,5 @@
         {% endfor %}
     </div>
 </div>
-<h2>所有案例</h2>
-<div class="ui left aligned segment">
-    <div class="ui container">
-        {% for case_info in case_infos %}
-        <div class="ui grid">
-            <div class="four wide column">
-                <p>{{case_info.name}}</p>
-            </div>
-            <div class="six wide column">
-                <p>{{case_info.desc}}</p>
-            </div>
-            <div class="three wide column">
-                <a href="{{ url_for('static',filename=case_info.path) }}">查看</a>
-            </div>
-            <div class="three wide column">
-                <a href="{{ url_for('static',filename=case_info.path) }}" download="name.pdf">下载</a>
-            </div>
-        </div>
-        {% endfor %}
-    </div>
-</div>
+ -->
 {% endblock %}

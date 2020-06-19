@@ -1,4 +1,26 @@
 {% extends "manage/menu.html" %} {% block right %}
+{% for file in files %}
+<form action="/add_file/{{file.typ}}" method="POST" enctype="multipart/form-data">
+    <input type="text" name="name" id="" placeholder="{{file.desc}}名称">
+    <input type="text" name="desc" id="" placeholder="{{file.desc}}简述">
+    <input type="file" name="file">
+    <input type="submit" name="input" value="添加{{file.desc}}">
+</form>
+{% for data in file.list %}
+<form method="post" action="/update_file/{{file.typ}}/{{data.name}}" method="POST" enctype="multipart/form-data">
+    <input name="name" type="text" placeholder="{{data.name}}">
+    <input name="desc" type="text" placeholder="{{data.desc}}">
+    <input type="file" name="file">
+    <input type="submit" value="修改">
+</form>
+<a href="{{url_for('static',filename=data.path)}}" methods="GET" target="_blank">查看{{data.file}}</a>
+<a href="/delete_file/{{file.typ}}/{{data.name}}">删除</a>
+{% endfor %}
+{% endfor %}
+{% endblock %}
+<!-- 
+
+
 <form action="" method="POST" enctype="multipart/form-data">
     <h2>所有作业</h2>
     <div class="ui left aligned segment">
@@ -73,4 +95,4 @@
         </div>
     </div>
 </form>
-{% endblock %}
+ -->

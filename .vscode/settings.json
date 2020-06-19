@@ -4,9 +4,10 @@
     "sqltools.connections": [
         {
             "database": "${workspaceFolder}\\teach_web.db",
-            "dialect": "SQLite",
-            "name": "teach_web"
+            "name": "teach_web",
+            "driver": "SQLite"
         }
     ],
-    "sqltools.useNodeRuntime": true
+    "sqltools.useNodeRuntime": true,
+    "editor.formatOnSave": false,
 }

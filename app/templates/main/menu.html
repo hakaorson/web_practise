@@ -1,11 +1,11 @@
 {% extends "base/base.html" %} {% block left %}
 <div class="ui fluid vertical pointing menu">
-    <a class="item" href="{{url_for('route_index')}}">
+    <a class="item" href="{{url_for('index')}}">
         课件介绍
     </a>
 </div>
 <div class="ui fluid vertical pointing menu">
-    <a class="item" href="{{url_for('route_chart')}}">
+    <a class="item" href="{{url_for('chart')}}">
         教学大纲
     </a>
 </div>
@@ -28,10 +28,7 @@
                         <p>{{sec.desc}}</p>
                         <div class="ui hidden divider"></div>
                         <form action="" method="GET">
-                            <a href="{{ url_for('route_media',chapter=chap.name,section=sec.name) }}"
-                                class="href">视频</a>
-                            <a href="{{ url_for('route_media',chapter=chap.name,section=sec.name) }}"
-                                class="href">ppt</a>
+                            <a href="/media/{{chap.c_id}}/{{sec.s_id}}" class="href">视频&PPT</a>
                         </form>
                     </div>
                     {% endfor %}
@@ -42,12 +39,12 @@
     </div>
 </div>
 <div class="ui fluid vertical pointing menu">
-    <a class="item" href="{{url_for('route_file')}}">
+    <a class="item" href="/file/case">
         案例
     </a>
 </div>
 <div class="ui fluid vertical pointing menu">
-    <a class="item" href="{{url_for('route_file')}}">
+    <a class="item" href="/file/home">
         作业
     </a>
 </div>
