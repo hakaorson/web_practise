@@ -2,8 +2,13 @@
 <h3>{{title}}</h3>
 <div class="ui center aligned segment">
     <h3>{{video_infos.name}}</h3>
+    {% if video_infos.name %}
     <video width="720" height="480" controls>
         <source src="{{ url_for('static',filename=video_infos.path) }}" type="video/mp4">
     </video>
+    {% else %}
+    <h4>视频不存在</h4>
+    {% endif %}
+
 </div>
 {% endblock %}
