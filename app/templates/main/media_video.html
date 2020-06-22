@@ -6,11 +6,4 @@
         <source src="{{ url_for('static',filename=video_infos.path) }}" type="video/mp4">
     </video>
 </div>
-<div class="ui center aligned segment">
-    <h3>{{ppt_infos.name}}</h3>
-    {% for png in ppt_infos.pngs %}
-    <img class="ui bordered fluid image" src="{{ url_for('static',filename=png.path) }}">
-    <p>{{png.name}}</p>
-    {% endfor %}
-</div>
 {% endblock %}

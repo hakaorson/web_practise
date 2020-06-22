@@ -3,5 +3,7 @@
 **/*.ppt
 **/*.pptx
 **/*.mp4
+*.db
+**/*.pdf
 **/*.pyc
 **/__pycache__

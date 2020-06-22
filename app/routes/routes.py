@@ -24,6 +24,8 @@ class LoginForm(FlaskForm):
     password = PasswordField('Password', validators=[DataRequired()])
     remember_me = BooleanField('Remember Me')
 # 建立路由，通过路由可以执行其覆盖的方法，可以多个路由指向同一个方法，意思就是给出了/index就执行一次这个方法
+
+
 @app.route('/')
 @app.route('/index')
 def index():  # 这个index返回的东西就是网页需要呈现的东西，在html中可以使用关键词调用数据
@@ -41,8 +43,8 @@ def chart():
     return result
 
 
-@app.route('/media/<chapter>/<section>')
-def media(chapter=None, section=None):
+@app.route('/media/<typ>/<chapter>/<section>')
+def media(chapter=None, section=None,typ='video'):
     final_info = base.get_structed_info()
     video_infos = {}
     ppt_infos = {}
@@ -52,21 +54,23 @@ def media(chapter=None, section=None):
     video_path = query.video_path
     png_path = query.png_path
     if video_path:
-        video_name='{}  视频'.format(query.s_name)
+        video_name = '{}  视频'.format(query.s_name)
         video_infos = {'name': video_name, 'path': base.filepath_process(
             video_path)}  # 替换前面的app/这几个字段
     if png_path:
-        ppt_name='第{}章  第{}节  {}  PPT文件'.format(base.CHINUM_MAP[int(chapter)],base.CHINUM_MAP[int(section)],query.s_name)
-        ppt_infos = {'name': ppt_name, 'pngs': []}
+        ppt_name = '第{}章  第{}节  {}  PPT文件'.format(
+            base.CHINUM_MAP[int(chapter)], base.CHINUM_MAP[int(section)], query.s_name)
+        ppt_infos = {'name': ppt_name, 'pngs': [],'ppt_path':query.ppt_path}
         imgpath_list = os.listdir(png_path)
-        for index, imgpath in enumerate(imgpath_list):
-            temp_path = os.path.join(png_path, imgpath)
+        for index, _ in enumerate(imgpath_list):
+            temp_path = os.path.join(png_path, '╗├╡╞╞¼{}.PNG'.format(index+1))#这里写得相当粗糙
             png_info = {'path': base.filepath_process(temp_path)}
             png_info['name'] = '第{}页'.format(str(index+1))
             ppt_infos['pngs'].append(png_info)
-    title='第{}章  第{}节  {}'.format(base.CHINUM_MAP[int(chapter)],base.CHINUM_MAP[int(section)],query.s_name)
+    title = '第{}章  第{}节  {}'.format(
+        base.CHINUM_MAP[int(chapter)], base.CHINUM_MAP[int(section)], query.s_name)
     return render_template(
-        'main/media.html', chaps=final_info, video_infos=video_infos, ppt_infos=ppt_infos,title=title)
+        'main/media_{}.html'.format(typ), chaps=final_info, video_infos=video_infos, ppt_infos=ppt_infos, title=title)
 
 
 @app.route('/file/<typ>')

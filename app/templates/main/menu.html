@@ -28,7 +28,16 @@
                         <p>{{sec.desc}}</p>
                         <div class="ui hidden divider"></div>
                         <form action="" method="GET">
-                            <a href="/media/{{chap.c_id}}/{{sec.s_id}}" class="href">视频&PPT</a>
+                        <div class="ui grid">
+                            <div class="eight wide column">
+                                <a href="/media/video/{{chap.c_id}}/{{sec.s_id}}" class="href">视频</a>
+                            </div>
+                            <div class="eight wide column">
+                                <a href="/media/ppt/{{chap.c_id}}/{{sec.s_id}}" class="href">PPT</a>
+                            </div>
+                        </div>
+                            
+                            
                         </form>
                     </div>
                     {% endfor %}
