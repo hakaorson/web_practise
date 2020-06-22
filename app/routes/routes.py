@@ -62,7 +62,7 @@ def media(chapter=None, section=None):
         for index, imgpath in enumerate(imgpath_list):
             temp_path = os.path.join(png_path, imgpath)
             png_info = {'path': base.filepath_process(temp_path)}
-            png_info['name'] = '第{}页'.format(base.CHINUM_MAP[index+1])
+            png_info['name'] = '第{}页'.format(str(index+1))
             ppt_infos['pngs'].append(png_info)
     title='第{}章  第{}节  {}'.format(base.CHINUM_MAP[int(chapter)],base.CHINUM_MAP[int(section)],query.s_name)
     return render_template(

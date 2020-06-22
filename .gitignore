@@ -1,0 +1,7 @@
+**/*.PNG
+**/*.zip
+**/*.ppt
+**/*.pptx
+**/*.mp4
+**/*.pyc
+**/__pycache__

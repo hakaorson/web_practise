@@ -15,14 +15,14 @@
         <div class="accordion">
             {% for chap in chaps %}
             <div class="active title">
-                <i class="dropdown icon"></i> {{chap.name}}
+                <i class="dropdown icon"></i>{{chap.c_index}} {{chap.name}}
             </div>
             <div class="active content">
                 <p>{{chap.desc}}</p>
                 <div class="accordion">
                     {% for sec in chap.secs %}
                     <div class="title">
-                        <i class="dropdown icon"></i> {{sec.name}}
+                        <i class="dropdown icon"></i>{{sec.s_index}} {{sec.name}}
                     </div>
                     <div class="content">
                         <p>{{sec.desc}}</p>

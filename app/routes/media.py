@@ -35,7 +35,8 @@ def store_request_file(path, name, req_file):
 def extract_zip(path, name):
     file_path = os.path.join(path, name)
     zip_file = zipfile.ZipFile(file_path, "r")
-    zip_file.extractall(path)
+    png_path = os.path.join(os.getcwd(), file_path[:-4])
+    zip_file.extractall(png_path)
     return file_path.replace('.zip', '')
 
 
